@@ -31,12 +31,23 @@ orgut_listesi = [
 "PKK/KCK",
 "İSLAMİ HAREKET ÖRGÜTÜ",
 "TKEP/L",
-"HİZBULLAH"
+"HİZBULLAH",
+"Sivil"
 ]
 
 wrong = 0
 right = 0
 
+def Civil_Question():
+	r = requests.get("https://thispersondoesnotexist.com", headers={'User-Agent': 'My User Agent 1.0'}).content
+	image = BytesIO(r)
+	true_answer = "Sivil"
+	answers = []
+	for i in orgut_listesi:
+		if i not in answers and len(answers) != 4 and i != true_answer:
+			answers.append(i)
+	random.shuffle(answers)
+	return (image, answers, true_answer)
 def Question():
 	question = random.choice(data)
 	true_answer = question["TOrgutAdi"]
@@ -67,7 +78,11 @@ def Right():
 
 def update_question():
     global true_answer
-    image, answers, true_answer = Question()
+    civil_or_not = random.randint(0, 4)
+    if civil_or_not != 0:
+        image, answers, true_answer = Question()
+    if civil_or_not == 0:
+        image, answers, true_answer = Civil_Question()	
 
     img = ImageTk.PhotoImage(Image.open(image).resize((800, 600)))
     label.config(image=img)
@@ -85,7 +100,11 @@ def main():
 	global root, label, label1, label2, buttons, button4, true_answer1
 	root = tk.Tk()
 	root.title("Terörist Quiz")
-	image, answers, true_answer1 = Question()
+	civil_or_not = random.randint(0, 4)
+	if civil_or_not != 0:
+		image, answers, true_answer1 = Question()
+	if civil_or_not == 0:
+		image, answers, true_answer1 = Civil_Question()	
 	canvas = tk.Canvas(root, width=1000, height=750, bg="white")
 	canvas.pack()
 
