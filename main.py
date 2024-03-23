@@ -7,7 +7,7 @@ import tkinter.messagebox
 from PIL import ImageTk, Image
 from io import BytesIO
 
-with open("data.json", "r") as file:
+with open("data.json", "r", encoding="utf-8") as file:
 	data = json.load(file)
 
 
