@@ -79,9 +79,9 @@ def Right():
 def update_question():
     global true_answer
     civil_or_not = random.randint(0, 4)
-    if civil_or_not != 0:
+    if civil_or_not > -1:
         image, answers, true_answer = Question()
-    if civil_or_not == 0:
+    if False:	#Temporarily Disabled
         image, answers, true_answer = Civil_Question()	
 
     img = ImageTk.PhotoImage(Image.open(image).resize((800, 600)))
@@ -101,9 +101,9 @@ def main():
 	root = tk.Tk()
 	root.title("Terörist Quiz")
 	civil_or_not = random.randint(0, 4)
-	if civil_or_not != 0:
+	if civil_or_not > -1:
 		image, answers, true_answer1 = Question()
-	if civil_or_not == 0:
+	if False:	#Temporarily disabled
 		image, answers, true_answer1 = Civil_Question()	
 	canvas = tk.Canvas(root, width=1000, height=750, bg="white")
 	canvas.pack()
